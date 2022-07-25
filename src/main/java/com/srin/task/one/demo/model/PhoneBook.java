@@ -2,6 +2,8 @@ package com.srin.task.one.demo.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -9,8 +11,8 @@ import javax.persistence.Table;
 @Table(name = "phone_book")
 public class PhoneBook {
     @Id
-    @Column(name = "phone_book_id", columnDefinition = "uniqueidentifier", length = 16, nullable = false, unique = true)
-    private String phoneBookId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(name = "first_name", length = 255)
     private String firstName;
     @Column(name = "last_name", length = 255)
@@ -18,11 +20,21 @@ public class PhoneBook {
     @Column(name = "phone_number", columnDefinition = "int")
     private int phoneNumber;
 
-    public String getPhoneBookId() {
-        return phoneBookId;
+    public PhoneBook() {
+
     }
-    public void setPhoneBookId(String phoneBookId) {
-        this.phoneBookId = phoneBookId;
+
+    public PhoneBook(String firstName, String lastName, int phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public long getId() {
+        return id;
+    }
+    public void setPhoneBookId(long id) {
+        this.id = id;
     }
     public String getFirstName() {
         return firstName;
@@ -44,7 +56,7 @@ public class PhoneBook {
     }
     @Override
     public String toString() {
-        return "PhoneBook [firstName=" + firstName + ", lastName=" + lastName + ", phoneBookId=" + phoneBookId
+        return "PhoneBook [firstName=" + firstName + ", lastName=" + lastName + ", phoneBookId=" + id
                 + ", phoneNumber=" + phoneNumber + "]";
     }
 }
